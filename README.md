@@ -161,6 +161,22 @@ O sistema já está funcional em `public/index.html` com:
 
 ### Como abrir e testar agora
 
+### Jeito mais fácil (1 clique)
+
+- Dê duplo clique no arquivo **`ABRIR_PORTAL.html`**.
+- Ele abre diretamente o portal no estilo Areia Ana.
+
+### Jeito automático por script
+
+```bash
+cd /workspace/controle-de-manutencao
+python abrir_portal.py
+```
+
+O navegador abre automaticamente em `http://localhost:8000`.
+
+### Jeito manual (alternativo)
+
 ```bash
 cd /workspace/controle-de-manutencao
 python -m http.server 8000 --directory public
