@@ -107,3 +107,10 @@ O acesso deve ser individual (um login por pessoa), com ao menos dois perfis:
 4. criar módulo de calendário com filtros e atualização por status;
 5. automatizar alertas via jobs agendados;
 6. publicar MVP em ambiente cloud com CI/CD.
+
+
+## Visualização publicada do modelo
+
+Para visualizar uma versão publicada do modelo em HTML, abra `public/index.html` no navegador.
+
+Se quiser publicar no GitHub Pages, configure a branch para servir a pasta `public/`.

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modelo Publicado — Controle de Manutenção de Frotas</title>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --card: #131a2b;
+        --text: #e7ecff;
+        --muted: #aab7de;
+        --accent: #4f7cff;
+        --ok: #22c55e;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(180deg, #070b15 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+      .container {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      .hero {
+        background: radial-gradient(circle at top right, #1f3b93 0%, #111a33 40%, var(--card) 100%);
+        border: 1px solid #2a365f;
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 20px;
+      }
+      h1, h2 { margin: 0 0 12px; }
+      p { color: var(--muted); line-height: 1.5; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid #273153;
+        border-radius: 14px;
+        padding: 16px;
+      }
+      ul { margin: 0; padding-left: 18px; }
+      li { margin: 6px 0; color: var(--muted); }
+      .pill {
+        display: inline-block;
+        margin: 4px 6px 0 0;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        border: 1px solid #324069;
+        color: #d3deff;
+      }
+      .ok { border-color: #1f7a45; color: #baf5d1; background: rgba(34, 197, 94, 0.1); }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      th, td {
+        border-bottom: 1px solid #2a365f;
+        text-align: left;
+        padding: 8px;
+        color: var(--muted);
+      }
+      th { color: #dce5ff; }
+      .footer {
+        margin-top: 22px;
+        color: #95a4d4;
+        font-size: 13px;
+      }
+      a { color: #9eb4ff; }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <section class="hero">
+        <h1>Modelo Publicado — Sistema de Controle de Manutenção de Frotas</h1>
+        <p>
+          Esta página apresenta o modelo do MVP em formato visual para publicação rápida (ex.: GitHub Pages).
+        </p>
+        <span class="pill ok">Login por pessoa</span>
+        <span class="pill ok">Perfil Admin/Usuário</span>
+        <span class="pill ok">Calendário de seleção</span>
+        <span class="pill ok">Alertas automáticos</span>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Escopo funcional</h2>
+          <ul>
+            <li>Cadastro completo de veículos e status operacional.</li>
+            <li>Manutenção preventiva, periódica e corretiva.</li>
+            <li>Calendário para seleção e visualização por data/status.</li>
+            <li>Chamados urgentes com fluxo: aberta → em andamento → finalizada.</li>
+            <li>Alertas por prazo, km limite, urgência e atraso.</li>
+            <li>Histórico por veículo com custos e frequência de falhas.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>Perfis e acesso</h2>
+          <ul>
+            <li><strong>Admin:</strong> gestão total, usuários e parametrizações globais.</li>
+            <li><strong>Usuário:</strong> abertura e acompanhamento de solicitações.</li>
+            <li>Login individual por pessoa (email + senha).</li>
+            <li>Ações e comentários registrados por usuário autenticado.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="card" style="margin-top: 16px;">
+        <h2>Modelo de dados (resumo)</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Entidade</th>
+              <th>Finalidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>usuarios</td><td>Autenticação e perfil de acesso (`admin`/`usuario`).</td></tr>
+            <tr><td>veiculos</td><td>Cadastro da frota com km e status.</td></tr>
+            <tr><td>planos_manutencao</td><td>Regras preventivas/periódicas por veículo.</td></tr>
+            <tr><td>ordens_manutencao</td><td>Execução de manutenção e controle de status.</td></tr>
+            <tr><td>itens_ordem</td><td>Peças e serviços aplicados em cada ordem.</td></tr>
+            <tr><td>comentarios_ordem</td><td>Comunicação interna por solicitação.</td></tr>
+            <tr><td>calendario_manutencao</td><td>Agenda por data com status visual.</td></tr>
+            <tr><td>alertas</td><td>Notificações automáticas de risco e pendências.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card" style="margin-top: 16px;">
+        <h2>Roadmap (MVP)</h2>
+        <ul>
+          <li>Fase 0: fundação e definição de política de acesso.</li>
+          <li>Fase 1: backend essencial (CRUDs e histórico).</li>
+          <li>Fase 2: autenticação/autorização por perfil.</li>
+          <li>Fase 3: alertas automáticos por prazo/km.</li>
+          <li>Fase 4: front-end com calendário e operações.</li>
+          <li>Fase 5: indicadores de custo e frequência.</li>
+        </ul>
+      </section>
+
+      <p class="footer">
+        Fonte completa: <a href="../README.md">README</a>,
+        <a href="../docs/modelo-dados.md">modelo-dados</a> e
+        <a href="../docs/roadmap-mvp.md">roadmap-mvp</a>.
+      </p>
+    </main>
+  </body>
+</html>
