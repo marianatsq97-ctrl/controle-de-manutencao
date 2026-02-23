@@ -114,3 +114,25 @@ O acesso deve ser individual (um login por pessoa), com ao menos dois perfis:
 Para visualizar uma versão publicada do modelo em HTML, abra `public/index.html` no navegador.
 
 Se quiser publicar no GitHub Pages, configure a branch para servir a pasta `public/`.
+
+## Como ver o sistema (passo a passo)
+
+### Opção 1 — Abrir direto no navegador
+
+1. Entre na pasta do projeto.
+2. Abra o arquivo `public/index.html` com duplo clique.
+
+### Opção 2 — Rodar servidor local (recomendado)
+
+No terminal, execute:
+
+```bash
+cd /workspace/controle-de-manutencao
+python -m http.server 8000 --directory public
+```
+
+Depois, abra no navegador:
+
+- `http://localhost:8000`
+
+Para parar o servidor: `Ctrl + C`.
