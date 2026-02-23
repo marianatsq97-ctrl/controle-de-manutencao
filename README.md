@@ -139,3 +139,31 @@ Para parar o servidor: `Ctrl + C`.
 
 
 > A página publicada em `public/index.html` foi estilizada no formato de portal corporativo com logo e navegação lateral (estilo Portal Areia Ana).
+
+
+## Aplicativo pronto para testar
+
+O sistema já está funcional em `public/index.html` com:
+
+- Login por pessoa (`admin` e `usuario`);
+- Cadastro de veículos;
+- Cadastro de planos de manutenção;
+- Abertura e atualização de ordens;
+- Calendário de eventos de manutenção;
+- Alertas automáticos;
+- Histórico consolidado;
+- Gestão de usuários (apenas admin).
+
+### Credenciais padrão
+
+- **Admin**: `admin@areiaana.com` / `admin123`
+- **Usuário**: `usuario@areiaana.com` / `usuario123`
+
+### Como abrir e testar agora
+
+```bash
+cd /workspace/controle-de-manutencao
+python -m http.server 8000 --directory public
+```
+
+Abra no navegador: `http://localhost:8000`

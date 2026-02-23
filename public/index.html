@@ -3,292 +3,256 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portal Areia Ana — Controle de Manutenção de Frotas</title>
+    <title>Portal Areia Ana — Sistema de Manutenção de Frotas</title>
     <style>
-      :root {
-        --bg: #f1f5f9;
-        --surface: #ffffff;
-        --text: #0f172a;
-        --muted: #475569;
-        --primary: #1e40af;
-        --primary-soft: #dbeafe;
-        --success: #16a34a;
-        --warning: #f59e0b;
-        --danger: #dc2626;
-        --line: #e2e8f0;
-      }
-
-      * { box-sizing: border-box; }
-
-      body {
-        margin: 0;
-        font-family: Inter, Segoe UI, Arial, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-      }
-
-      .app {
-        min-height: 100vh;
-        display: grid;
-        grid-template-columns: 250px 1fr;
-      }
-
-      .sidebar {
-        background: #0f172a;
-        color: #e2e8f0;
-        padding: 20px 16px;
-        border-right: 1px solid #1e293b;
-      }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding-bottom: 18px;
-        border-bottom: 1px solid #1e293b;
-        margin-bottom: 14px;
-      }
-
-      .brand img {
-        width: 42px;
-        height: 42px;
-        border-radius: 10px;
-      }
-
-      .brand h1 {
-        margin: 0;
-        font-size: 14px;
-        line-height: 1.2;
-      }
-
-      .menu a {
-        display: block;
-        text-decoration: none;
-        color: #cbd5e1;
-        padding: 10px 12px;
-        border-radius: 8px;
-        margin: 6px 0;
-        font-size: 14px;
-      }
-
-      .menu a.active,
-      .menu a:hover {
-        background: #1e293b;
-        color: #eff6ff;
-      }
-
-      .content {
-        padding: 20px;
-      }
-
-      .topbar {
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 12px 16px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
-      }
-
-      .topbar .left {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .topbar .left img { width: 160px; }
-
-      .badge {
-        font-size: 12px;
-        background: var(--primary-soft);
-        color: var(--primary);
-        border: 1px solid #bfdbfe;
-        padding: 4px 8px;
-        border-radius: 999px;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 12px;
-      }
-
-      .card {
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 14px;
-      }
-
-      .card h2 {
-        margin: 0 0 8px;
-        font-size: 16px;
-      }
-
-      .kpi {
-        font-size: 26px;
-        font-weight: 800;
-      }
-
-      .muted { color: var(--muted); font-size: 13px; }
-
-      .status {
-        display: inline-block;
-        padding: 3px 8px;
-        border-radius: 999px;
-        font-size: 12px;
-        margin-right: 4px;
-      }
-
-      .s-open { background: #fee2e2; color: var(--danger); }
-      .s-progress { background: #fef3c7; color: #92400e; }
-      .s-done { background: #dcfce7; color: var(--success); }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 14px;
-      }
-
-      th, td {
-        border-bottom: 1px solid var(--line);
-        text-align: left;
-        padding: 10px 8px;
-      }
-
-      th { color: #334155; }
-
-      .section-title {
-        margin: 16px 0 10px;
-        font-size: 18px;
-      }
-
-      .timeline {
-        margin: 0;
-        padding-left: 18px;
-      }
-
-      .timeline li {
-        margin: 8px 0;
-        color: var(--muted);
-      }
-
-      @media (max-width: 920px) {
-        .app { grid-template-columns: 1fr; }
-        .sidebar { display: none; }
-      }
+      :root { --bg:#f1f5f9; --surface:#fff; --text:#0f172a; --muted:#475569; --line:#e2e8f0; --primary:#1e40af; --primary-soft:#dbeafe; --danger:#dc2626; --success:#16a34a; --warn:#f59e0b; }
+      * { box-sizing:border-box; }
+      body { margin:0; background:var(--bg); color:var(--text); font-family:Inter,Segoe UI,Arial,sans-serif; }
+      .hidden{display:none!important}
+      .btn{border:1px solid var(--line); background:#fff; border-radius:10px; padding:8px 12px; cursor:pointer; font-weight:600}
+      .btn.primary{background:var(--primary); color:#fff; border-color:var(--primary)}
+      .btn.danger{background:#fee2e2;border-color:#fecaca;color:#991b1b}
+      .input,.select,textarea{width:100%; border:1px solid #cbd5e1; border-radius:10px; padding:9px; font-size:14px; background:#fff}
+      textarea{min-height:80px; resize:vertical}
+      .grid{display:grid; gap:12px}
+      .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .grid.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+      .card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px}
+      .kpi{font-size:26px;font-weight:800}
+      .muted{color:var(--muted);font-size:13px}
+      .app{min-height:100vh; display:grid; grid-template-columns:250px 1fr}
+      .sidebar{background:#0f172a;color:#e2e8f0;padding:20px 16px}
+      .brand{display:flex; gap:10px; align-items:center; border-bottom:1px solid #1e293b; padding-bottom:14px; margin-bottom:12px}
+      .brand img{width:42px;height:42px;border-radius:8px}
+      .menu button{display:block;width:100%; margin:6px 0; text-align:left; background:transparent; color:#cbd5e1; border:0; border-radius:8px; padding:10px; cursor:pointer}
+      .menu button.active,.menu button:hover{background:#1e293b;color:#fff}
+      .content{padding:18px}
+      .topbar{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:14px}
+      .topbar img{width:160px}
+      .section-title{margin:0 0 10px}
+      table{width:100%; border-collapse:collapse; font-size:14px}
+      th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left}
+      .pill{padding:3px 8px;border-radius:999px;font-size:12px;display:inline-block}
+      .st-open{background:#fee2e2;color:#991b1b}.st-progress{background:#fef3c7;color:#92400e}.st-done{background:#dcfce7;color:#166534}
+      .login-wrap{min-height:100vh;display:grid;place-items:center;padding:16px}
+      .login-box{max-width:420px;width:100%;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+      .login-box img{width:180px}
+      .calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+      .day{background:#fff;border:1px solid var(--line);border-radius:10px;min-height:90px;padding:6px}
+      .event{font-size:11px;padding:2px 6px;border-radius:999px;margin-top:4px;display:inline-block}
+      .event.programada{background:#fee2e2;color:#991b1b}.event.em_andamento{background:#fef3c7;color:#92400e}.event.finalizada{background:#dcfce7;color:#166534}.event.atrasada{background:#fecaca;color:#7f1d1d}
+      @media (max-width:1000px){.app{grid-template-columns:1fr}.sidebar{display:none}.grid.cols-4,.grid.cols-3,.grid.cols-2{grid-template-columns:1fr}}
     </style>
   </head>
   <body>
-    <div class="app">
-      <aside class="sidebar">
-        <div class="brand">
-          <img src="assets-logo.svg" alt="Logo Areia Ana" />
-          <h1>Portal Areia Ana<br/>Frotas</h1>
+    <section id="loginView" class="login-wrap">
+      <div class="login-box">
+        <img src="assets-logo.svg" alt="Portal Areia Ana"/>
+        <h2>Sistema de Manutenção de Frotas</h2>
+        <p class="muted">Entre com seu usuário para testar o sistema.</p>
+        <label>Email</label><input id="loginEmail" class="input" value="admin@areiaana.com"/>
+        <label>Senha</label><input id="loginSenha" class="input" type="password" value="admin123"/>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+          <span class="muted">Admin padrão: admin@areiaana.com</span>
+          <button id="btnLogin" class="btn primary">Entrar</button>
         </div>
+      </div>
+    </section>
 
-        <nav class="menu">
-          <a class="active" href="#">Visão geral</a>
-          <a href="#">Calendário</a>
-          <a href="#">Ordens de manutenção</a>
-          <a href="#">Alertas</a>
-          <a href="#">Histórico</a>
-          <a href="#">Usuários</a>
-        </nav>
+    <section id="appView" class="app hidden">
+      <aside class="sidebar">
+        <div class="brand"><img src="assets-logo.svg" alt="logo"/><div><strong>Portal Areia Ana</strong><div class="muted" style="color:#94a3b8">Frotas</div></div></div>
+        <div class="menu" id="menu"></div>
       </aside>
-
       <main class="content">
         <header class="topbar">
-          <div class="left">
-            <img src="assets-logo.svg" alt="Portal Areia Ana" />
-            <span class="badge">MVP Publicado</span>
-          </div>
-          <div>
-            <strong>Perfil:</strong> Admin
-          </div>
+          <div style="display:flex;gap:10px;align-items:center"><img src="assets-logo.svg" alt="logo"/><span class="pill" style="background:var(--primary-soft);color:var(--primary)">Aplicativo pronto para teste</span></div>
+          <div><span id="who"></span> <button class="btn" id="logoutBtn">Sair</button></div>
         </header>
-
-        <section class="grid">
-          <article class="card">
-            <h2>Frotas ativas</h2>
-            <div class="kpi">27</div>
-            <div class="muted">3 em manutenção</div>
-          </article>
-          <article class="card">
-            <h2>Chamados urgentes</h2>
-            <div class="kpi">5</div>
-            <div class="muted">2 com atraso</div>
-          </article>
-          <article class="card">
-            <h2>Manutenções do mês</h2>
-            <div class="kpi">41</div>
-            <div class="muted">Preventiva, periódica e corretiva</div>
-          </article>
-          <article class="card">
-            <h2>Custo mensal</h2>
-            <div class="kpi">R$ 38.920</div>
-            <div class="muted">Visão consolidada por frota</div>
-          </article>
-        </section>
-
-        <h3 class="section-title">Agenda de manutenção (calendário/seleção)</h3>
-        <section class="card">
-          <p class="muted">Filtros: Caminhões • Preventiva • Maio/2026</p>
-          <span class="status s-open">Programada</span>
-          <span class="status s-progress">Em andamento</span>
-          <span class="status s-done">Finalizada</span>
-        </section>
-
-        <h3 class="section-title">Ordens recentes</h3>
-        <section class="card">
-          <table>
-            <thead>
-              <tr>
-                <th>Veículo</th>
-                <th>Tipo</th>
-                <th>Status</th>
-                <th>Responsável</th>
-                <th>Data</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>FRT-014 | ABC-1D23</td>
-                <td>Preventiva</td>
-                <td><span class="status s-progress">Em andamento</span></td>
-                <td>Equipe Oficina A</td>
-                <td>10/05/2026</td>
-              </tr>
-              <tr>
-                <td>FRT-003 | JKL-4M56</td>
-                <td>Corretiva</td>
-                <td><span class="status s-open">Programada</span></td>
-                <td>Equipe Oficina B</td>
-                <td>11/05/2026</td>
-              </tr>
-              <tr>
-                <td>FRT-020 | QWE-7R89</td>
-                <td>Periódica</td>
-                <td><span class="status s-done">Finalizada</span></td>
-                <td>Equipe Oficina A</td>
-                <td>09/05/2026</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-
-        <h3 class="section-title">Linha do tempo da frota</h3>
-        <section class="card">
-          <ul class="timeline">
-            <li>09/05 — Troca de óleo e filtro concluída (FRT-020).</li>
-            <li>10/05 — Solicitação urgente de freio aberta (FRT-014).</li>
-            <li>10/05 — Comentário da manutenção: peça encomendada.</li>
-            <li>11/05 — Revisão semanal programada (FRT-003).</li>
-          </ul>
-        </section>
+        <div id="view"></div>
       </main>
-    </div>
+    </section>
+
+<script>
+const DB_KEY='frotas_app_v1';
+const seed={
+ users:[
+  {id:crypto.randomUUID(),nome:'Administrador',email:'admin@areiaana.com',senha:'admin123',perfil:'admin',ativo:true},
+  {id:crypto.randomUUID(),nome:'Operador 1',email:'usuario@areiaana.com',senha:'usuario123',perfil:'usuario',ativo:true}
+ ],
+ vehicles:[{id:crypto.randomUUID(),identificacao:'FRT-001',modelo:'VW 24.280',placa:'ABC-1D23',tipo:'Caminhão',km:124500,status:'ativo'}],
+ plans:[{id:crypto.randomUUID(),vehicleId:null,nome:'Troca de óleo',tipo:'preventiva',periodicidadeKm:10000,periodicidadeDias:180,ativo:true}],
+ orders:[], comments:[], events:[], alerts:[]
+};
+const load=()=>JSON.parse(localStorage.getItem(DB_KEY)||'null')||seed;
+const save=(d)=>localStorage.setItem(DB_KEY,JSON.stringify(d));
+let db=load(); save(db);
+let session=JSON.parse(localStorage.getItem('session_user')||'null');
+const menuItems=[['dashboard','Visão geral'],['veiculos','Veículos'],['planos','Planos'],['ordens','Ordens'],['calendario','Calendário'],['alertas','Alertas'],['historico','Histórico'],['usuarios','Usuários']];
+let currentView='dashboard';
+
+const $=s=>document.querySelector(s);
+const el=(t,h='')=>{const e=document.createElement(t);e.innerHTML=h;return e;};
+
+function statusClass(s){return s==='finalizada'?'st-done':s==='em_andamento'?'st-progress':'st-open'}
+function ensureAlerts(){
+ db.alerts=[];
+ const today=new Date();
+ db.events.forEach(ev=>{
+  const d=new Date(ev.data);
+  if(ev.status==='atrasada') db.alerts.push({id:crypto.randomUUID(),tipo:'atrasada',mensagem:`Manutenção atrasada: ${ev.titulo}`});
+  if(ev.status==='programada' && (d-today)/(1000*60*60*24)<=3 && (d-today)>=0) db.alerts.push({id:crypto.randomUUID(),tipo:'prazo_proximo',mensagem:`Próxima manutenção: ${ev.titulo}`});
+ });
+ db.orders.filter(o=>o.prioridade==='urgente'&&o.status!=='finalizada').forEach(o=>db.alerts.push({id:crypto.randomUUID(),tipo:'urgente_aberta',mensagem:`Urgente aberta para ${o.veiculo}`}))
+ save(db);
+}
+
+function renderMenu(){
+ const container=$('#menu'); container.innerHTML='';
+ menuItems.forEach(([id,label])=>{
+  if(id==='usuarios' && session.perfil!=='admin') return;
+  const b=el('button',label); if(id===currentView)b.classList.add('active');
+  b.onclick=()=>{currentView=id; render();}; container.appendChild(b);
+ })
+}
+
+function renderDashboard(){
+ ensureAlerts();
+ const urg=db.orders.filter(o=>o.prioridade==='urgente'&&o.status!=='finalizada').length;
+ const aberto=db.orders.filter(o=>o.status!=='finalizada').length;
+ const custo=db.orders.reduce((a,b)=>a+Number(b.custo||0),0);
+ return `<div class='grid cols-4'>
+ <div class='card'><div class='section-title'>Frotas</div><div class='kpi'>${db.vehicles.length}</div><div class='muted'>${db.vehicles.filter(v=>v.status==='em_manutencao').length} em manutenção</div></div>
+ <div class='card'><div class='section-title'>Ordens em aberto</div><div class='kpi'>${aberto}</div><div class='muted'>Monitoramento ativo</div></div>
+ <div class='card'><div class='section-title'>Urgentes</div><div class='kpi'>${urg}</div><div class='muted'>Prioridade alta</div></div>
+ <div class='card'><div class='section-title'>Custo total</div><div class='kpi'>R$ ${custo.toFixed(2)}</div><div class='muted'>Acumulado</div></div>
+ </div>
+ <div class='card' style='margin-top:12px'><h3 class='section-title'>Últimas ordens</h3>
+ <table><thead><tr><th>Veículo</th><th>Tipo</th><th>Status</th><th>Prioridade</th></tr></thead><tbody>
+ ${db.orders.slice(-5).reverse().map(o=>`<tr><td>${o.veiculo}</td><td>${o.tipo}</td><td><span class='pill ${statusClass(o.status)}'>${o.status}</span></td><td>${o.prioridade}</td></tr>`).join('')||'<tr><td colspan=4 class=muted>Nenhuma ordem cadastrada.</td></tr>'}
+ </tbody></table></div>`;
+}
+
+function renderVeiculos(){
+ return `<div class='grid cols-2'><div class='card'>
+ <h3 class='section-title'>Cadastrar veículo</h3>
+ <div class='grid'>
+ <input id='v_ident' class='input' placeholder='Identificação (FRT-010)'>
+ <input id='v_modelo' class='input' placeholder='Modelo'>
+ <input id='v_placa' class='input' placeholder='Placa'>
+ <input id='v_tipo' class='input' placeholder='Tipo'>
+ <input id='v_km' class='input' type='number' placeholder='KM atual'>
+ <select id='v_status' class='select'><option value='ativo'>ativo</option><option value='em_manutencao'>em_manutencao</option></select>
+ <button class='btn primary' id='saveVehicle'>Salvar veículo</button></div></div>
+ <div class='card'><h3 class='section-title'>Lista de veículos</h3><table><thead><tr><th>ID</th><th>Modelo</th><th>Placa</th><th>KM</th><th>Status</th></tr></thead><tbody>
+ ${db.vehicles.map(v=>`<tr><td>${v.identificacao}</td><td>${v.modelo}</td><td>${v.placa}</td><td>${v.km}</td><td>${v.status}</td></tr>`).join('')}
+ </tbody></table></div></div>`;
+}
+
+function renderPlanos(){
+ return `<div class='grid cols-2'><div class='card'><h3 class='section-title'>Cadastrar plano</h3>
+ <div class='grid'>
+ <input id='p_nome' class='input' placeholder='Nome do plano'>
+ <select id='p_tipo' class='select'><option value='preventiva'>preventiva</option><option value='periodica'>periodica</option></select>
+ <input id='p_km' class='input' type='number' placeholder='Periodicidade KM'>
+ <input id='p_dias' class='input' type='number' placeholder='Periodicidade dias'>
+ <button class='btn primary' id='savePlan'>Salvar plano</button>
+ </div></div>
+ <div class='card'><h3 class='section-title'>Planos cadastrados</h3>
+ <table><thead><tr><th>Nome</th><th>Tipo</th><th>KM</th><th>Dias</th></tr></thead><tbody>
+ ${db.plans.map(p=>`<tr><td>${p.nome}</td><td>${p.tipo}</td><td>${p.periodicidadeKm||'-'}</td><td>${p.periodicidadeDias||'-'}</td></tr>`).join('')}
+ </tbody></table></div></div>`;
+}
+
+function renderOrdens(){
+ return `<div class='grid cols-2'><div class='card'><h3 class='section-title'>Abrir ordem de manutenção</h3>
+ <div class='grid'>
+ <select id='o_veic' class='select'>${db.vehicles.map(v=>`<option>${v.identificacao}</option>`).join('')}</select>
+ <select id='o_tipo' class='select'><option>preventiva</option><option>periodica</option><option>corretiva</option></select>
+ <select id='o_prioridade' class='select'><option>baixa</option><option>media</option><option>alta</option><option>urgente</option></select>
+ <textarea id='o_desc' placeholder='Descrição'></textarea>
+ <input id='o_resp' class='input' placeholder='Responsável'>
+ <input id='o_custo' class='input' type='number' step='0.01' placeholder='Custo'>
+ <button class='btn primary' id='saveOrder'>Salvar ordem</button>
+ </div></div>
+ <div class='card'><h3 class='section-title'>Ordens e comentários</h3>
+ <table><thead><tr><th>Veículo</th><th>Status</th><th>Ações</th></tr></thead><tbody>
+ ${db.orders.map(o=>`<tr><td>${o.veiculo}</td><td><span class='pill ${statusClass(o.status)}'>${o.status}</span></td><td>
+ <button class='btn' onclick="setStatus('${o.id}','em_andamento')">Em andamento</button>
+ <button class='btn' onclick="setStatus('${o.id}','finalizada')">Finalizar</button>
+ <button class='btn' onclick="commentOrder('${o.id}')">Comentar</button></td></tr>`).join('')||'<tr><td colspan=3 class=muted>Nenhuma ordem.</td></tr>'}
+ </tbody></table></div></div>`;
+}
+
+function renderCalendario(){
+ const now=new Date(); const y=now.getFullYear(), m=now.getMonth();
+ const first=new Date(y,m,1).getDay(); const days=new Date(y,m+1,0).getDate();
+ let cells=''; for(let i=0;i<first;i++) cells+='<div></div>';
+ for(let d=1;d<=days;d++){
+  const dt=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  const ev=db.events.filter(e=>e.data===dt);
+  cells+=`<div class='day'><strong>${d}</strong>${ev.map(e=>`<div class='event ${e.status}'>${e.titulo}</div>`).join('')}</div>`;
+ }
+ return `<div class='grid cols-2'><div class='card'><h3 class='section-title'>Criar evento no calendário</h3>
+ <div class='grid'>
+ <input id='c_titulo' class='input' placeholder='Título'>
+ <input id='c_data' class='input' type='date'>
+ <select id='c_status' class='select'><option value='programada'>programada</option><option value='em_andamento'>em_andamento</option><option value='finalizada'>finalizada</option><option value='atrasada'>atrasada</option></select>
+ <button id='saveEvent' class='btn primary'>Salvar evento</button>
+ </div></div>
+ <div class='card'><h3 class='section-title'>Calendário ${m+1}/${y}</h3><div class='calendar'>${cells}</div></div></div>`;
+}
+
+function renderAlertas(){ ensureAlerts(); return `<div class='card'><h3 class='section-title'>Alertas automáticos</h3><ul>${db.alerts.map(a=>`<li>${a.tipo}: ${a.mensagem}</li>`).join('')||'<li class=muted>Sem alertas.</li>'}</ul></div>`; }
+function renderHistorico(){
+ const linhas=[...db.orders].reverse().map(o=>`<tr><td>${o.data}</td><td>${o.veiculo}</td><td>${o.tipo}</td><td>${o.descricao}</td><td>R$ ${Number(o.custo||0).toFixed(2)}</td></tr>`).join('')||'<tr><td colspan=5 class=muted>Nenhum registro.</td></tr>';
+ return `<div class='card'><h3 class='section-title'>Histórico completo</h3><table><thead><tr><th>Data</th><th>Veículo</th><th>Tipo</th><th>Descrição</th><th>Custo</th></tr></thead><tbody>${linhas}</tbody></table></div>`;
+}
+function renderUsuarios(){
+ if(session.perfil!=='admin') return `<div class='card'>Apenas admin pode acessar.</div>`;
+ return `<div class='grid cols-2'><div class='card'><h3 class='section-title'>Cadastrar usuário</h3><div class='grid'>
+ <input id='u_nome' class='input' placeholder='Nome'>
+ <input id='u_email' class='input' placeholder='Email'>
+ <input id='u_senha' class='input' placeholder='Senha'>
+ <select id='u_perfil' class='select'><option value='usuario'>usuario</option><option value='admin'>admin</option></select>
+ <button id='saveUser' class='btn primary'>Salvar usuário</button>
+ </div></div>
+ <div class='card'><h3 class='section-title'>Usuários cadastrados</h3><table><thead><tr><th>Nome</th><th>Email</th><th>Perfil</th></tr></thead><tbody>
+ ${db.users.map(u=>`<tr><td>${u.nome}</td><td>${u.email}</td><td>${u.perfil}</td></tr>`).join('')}
+ </tbody></table></div></div>`;
+}
+
+function bindActions(){
+ $('#saveVehicle')?.addEventListener('click',()=>{db.vehicles.push({id:crypto.randomUUID(),identificacao:$('#v_ident').value,modelo:$('#v_modelo').value,placa:$('#v_placa').value,tipo:$('#v_tipo').value,km:Number($('#v_km').value||0),status:$('#v_status').value});save(db);render();});
+ $('#savePlan')?.addEventListener('click',()=>{db.plans.push({id:crypto.randomUUID(),nome:$('#p_nome').value,tipo:$('#p_tipo').value,periodicidadeKm:Number($('#p_km').value||0),periodicidadeDias:Number($('#p_dias').value||0),ativo:true});save(db);render();});
+ $('#saveOrder')?.addEventListener('click',()=>{db.orders.push({id:crypto.randomUUID(),veiculo:$('#o_veic').value,tipo:$('#o_tipo').value,prioridade:$('#o_prioridade').value,status:'aberta',descricao:$('#o_desc').value,responsavel:$('#o_resp').value,custo:Number($('#o_custo').value||0),data:new Date().toLocaleDateString('pt-BR')});save(db);render();});
+ $('#saveEvent')?.addEventListener('click',()=>{db.events.push({id:crypto.randomUUID(),titulo:$('#c_titulo').value,data:$('#c_data').value,status:$('#c_status').value});save(db);render();});
+ $('#saveUser')?.addEventListener('click',()=>{db.users.push({id:crypto.randomUUID(),nome:$('#u_nome').value,email:$('#u_email').value,senha:$('#u_senha').value,perfil:$('#u_perfil').value,ativo:true});save(db);render();});
+}
+
+window.setStatus=(id,status)=>{const o=db.orders.find(x=>x.id===id); if(o){o.status=status; save(db); render();}};
+window.commentOrder=(id)=>{const msg=prompt('Comentário:'); if(!msg)return; db.comments.push({id:crypto.randomUUID(),orderId:id,autor:session.nome,msg,data:new Date().toLocaleString('pt-BR')}); save(db); alert('Comentário salvo.');};
+
+function render(){
+ if(!session){$('#loginView').classList.remove('hidden');$('#appView').classList.add('hidden');return;}
+ $('#loginView').classList.add('hidden');$('#appView').classList.remove('hidden');
+ $('#who').textContent=`${session.nome} (${session.perfil})`;
+ renderMenu();
+ const views={dashboard:renderDashboard,veiculos:renderVeiculos,planos:renderPlanos,ordens:renderOrdens,calendario:renderCalendario,alertas:renderAlertas,historico:renderHistorico,usuarios:renderUsuarios};
+ $('#view').innerHTML=(views[currentView]||renderDashboard)();
+ bindActions();
+}
+
+$('#btnLogin').addEventListener('click',()=>{
+ const u=db.users.find(x=>x.email===$('#loginEmail').value && x.senha===$('#loginSenha').value && x.ativo);
+ if(!u){alert('Login inválido');return;}
+ session={id:u.id,nome:u.nome,perfil:u.perfil,email:u.email};
+ localStorage.setItem('session_user',JSON.stringify(session));
+ render();
+});
+$('#logoutBtn').addEventListener('click',()=>{localStorage.removeItem('session_user');session=null;render();});
+render();
+</script>
   </body>
 </html>
