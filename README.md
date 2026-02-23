@@ -136,3 +136,6 @@ Depois, abra no navegador:
 - `http://localhost:8000`
 
 Para parar o servidor: `Ctrl + C`.
+
+
+> A página publicada em `public/index.html` foi estilizada no formato de portal corporativo com logo e navegação lateral (estilo Portal Areia Ana).
